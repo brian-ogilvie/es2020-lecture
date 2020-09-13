@@ -5,29 +5,43 @@ const nextBtn = document.getElementById('next');
 
 // Here's the dynamic import!
 async function importAndDisplay(moduleName) {
-  const { html } = await import(`./slides/${moduleName}.mjs`);
-  slideDeck.innerHTML = html();
-  nextBtn.innerText = 'Next';
+  try {
+    const { html } = await import(`./slides/${moduleName}.mjs`);
+    slideDeck.innerHTML = html();
+    nextBtn.innerText = 'Next';
+  } catch (e) {
+    displayError(e);
+  }
 }
+
+async function run() {
+  // slideIterator will return a list of slide names in order:
+  // 'Intro', 'SprintPlanning', 'Implementation', 'Release'
+  const slideIterator = await getData();
+  nextBtn.addEventListener('click', getNext(slideIterator));
+}
+
+run();
 
 function completeSlideShow() {
   slideDeck.innerHTML = '<div>You have completed the slideshow!</div>';
   nextBtn.disabled = true;
 }
 
-const getNext = iterator => () => {
-  const { value: slideName, done } = iterator.next();
-  if (slideName) {
-    importAndDisplay(slideName);
-  }
-  if (done) {
-    completeSlideShow();
-  }
-};
-
-async function run() {
-  const slideIterator = await getData();
-  nextBtn.addEventListener('click', getNext(slideIterator));
+function getNext(iterator) {
+  return function returnNext() {
+    const { value: slideName, done } = iterator.next();
+    if (slideName) {
+      importAndDisplay(slideName);
+    }
+    if (done) {
+      completeSlideShow();
+    }
+  };
 }
 
-run();
+function displayError(e) {
+  const div = document.createElement('div');
+  div.innerText = e.message;
+  slideDeck.append(div);
+}

@@ -6,7 +6,7 @@ function* arrayIterator(arr) {
 
 export function getData() {
   return new Promise(resolve => {
-    const slideNames = ['One', 'Two', 'Three', 'Four'];
+    const slideNames = ['Intro', 'SprintPlanning', 'Implementation', 'Release'];
     resolve(arrayIterator(slideNames));
   });
 }
