@@ -8,7 +8,6 @@ async function importAndDisplay(moduleName) {
   try {
     const { html } = await import(`./slides/${moduleName}.mjs`);
     slideDeck.innerHTML = html();
-    nextBtn.innerText = 'Next';
   } catch (e) {
     displayError(e);
   }
@@ -30,6 +29,7 @@ function completeSlideShow() {
 
 function getNext(iterator) {
   return function returnNext() {
+    nextBtn.innerText = 'Next';
     const { value: slideName, done } = iterator.next();
     if (slideName) {
       importAndDisplay(slideName);
