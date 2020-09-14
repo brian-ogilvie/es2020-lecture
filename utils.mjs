@@ -18,3 +18,7 @@ export function createRunBoth(oldFn, newFn) {
     runBoth(oldFn, newFn, data);
   };
 }
+
+export function getRandomDelay() {
+  return Math.random() * 1000 + 1000;
+}
