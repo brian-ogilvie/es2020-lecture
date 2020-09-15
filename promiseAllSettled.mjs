@@ -5,7 +5,7 @@ async function promiseAll() {
     const results = await Promise.all([
       promise1(),
       promise2(),
-      promise3(),
+      // promise3(),
       promise4(),
     ]);
     console.log('Promise.all succeeded:', results);
@@ -19,7 +19,7 @@ async function promiseAllSettled() {
     const results = await Promise.allSettled([
       promise1(),
       promise2(),
-      promise3(),
+      // promise3(),
       promise4(),
     ]);
     console.log('Promise.allSettled succeeded:', results);

@@ -1,5 +1,5 @@
 (function GlobalModule() {
-  globalThis.logGlobalObject = function () {
-    console.log(globalThis);
+  window.logGlobalObject = function () {
+    console.log(window);
   };
 })();

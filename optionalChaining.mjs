@@ -64,7 +64,7 @@ function introduceOld(data) {
 
 // 2020, using optional chaining:
 function introduceNew(data) {
-  const { first, last } = data?.user?.personalInformation?.name ?? {};
+  const { first, last } = data?.user?.personalInformation?.name;
   if (first && last) {
     console.log(`${last}. ${first} ${last}.`);
   } else {
@@ -79,5 +79,5 @@ const missingData = {
 };
 
 const introduceBoth = createRunBoth(introduceOld, introduceNew);
-introduceBoth(correctData);
-introduceBoth(missingData);
+// introduceBoth(correctData);
+// introduceBoth(missingData);
